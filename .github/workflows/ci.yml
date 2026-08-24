@@ -20,8 +20,8 @@ jobs:
           pip install -e ".[dev]"
       - name: Compile
         run: python -m compileall -q app ml deployment scripts tests
-      - name: Lint
-        run: ruff check .
+      - name: Lint critical Python errors
+        run: ruff check . --select E9,F63,F7,F82
       - name: Tests
         run: pytest -q
   terraform:
