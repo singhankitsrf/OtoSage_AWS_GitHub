@@ -1,0 +1,21 @@
+# Deployment Checklist
+
+- [ ] Verify AWS CLI identity
+- [ ] Install Terraform
+- [ ] Create `terraform.tfvars`
+- [ ] `terraform init`
+- [ ] `terraform validate`
+- [ ] `terraform apply`
+- [ ] Upload extracted dataset to private S3
+- [ ] Upsert SageMaker Pipeline
+- [ ] Run Pipeline
+- [ ] Review actual evaluation
+- [ ] Approve selected Model Registry version
+- [ ] Deploy async endpoint
+- [ ] Configure autoscaling
+- [ ] Re-apply Terraform with matching endpoint name
+- [ ] Test POST `/upload`
+- [ ] Upload an image using returned pre-signed URL
+- [ ] Test GET `/jobs/{job_id}`
+- [ ] Review CloudWatch logs
+- [ ] Scale down or remove development resources

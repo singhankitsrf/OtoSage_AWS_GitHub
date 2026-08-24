@@ -1,0 +1,6 @@
+project_name            = "otosage-aws"
+aws_region              = "us-east-1"
+sagemaker_endpoint_name = "otosage-aws-async"
+github_org              = "YOUR_GITHUB_USERNAME"
+github_repo             = "OtoSage_AWS_GitHub"
+log_retention_days      = 30

@@ -1,0 +1,28 @@
+name: Deploy AWS Infrastructure
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/terraform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Plan
+        run: terraform plan -var="aws_region=${{ vars.AWS_REGION }}" -var="github_org=${{ github.repository_owner }}" -var="github_repo=${{ github.event.repository.name }}"
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var="aws_region=${{ vars.AWS_REGION }}" -var="github_org=${{ github.repository_owner }}" -var="github_repo=${{ github.event.repository.name }}"
