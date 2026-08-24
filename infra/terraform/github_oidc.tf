@@ -45,10 +45,23 @@ resource "aws_iam_role_policy" "github_actions" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{
-      Effect = "Allow"
-      Action = ["apigateway:*","dynamodb:*","iam:*","lambda:*","logs:*","s3:*","sns:*","sagemaker:*","application-autoscaling:*","cloudwatch:*"]
-      Resource = "*"
-    }]
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "apigateway:*",
+          "dynamodb:*",
+          "iam:*",
+          "lambda:*",
+          "logs:*",
+          "s3:*",
+          "sns:*",
+          "sagemaker:*",
+          "application-autoscaling:*",
+          "cloudwatch:*"
+        ]
+        Resource = "*"
+      }
+    ]
   })
 }
