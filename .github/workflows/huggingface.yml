@@ -1,5 +1,6 @@
 name: Hugging Face Space
 on:
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,6 +27,7 @@ jobs:
           docker logs portfolio-space
           exit 1
       - name: Publish to Hugging Face
+        if: github.event_name == 'workflow_dispatch'
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
