@@ -1,4 +1,4 @@
-name: Hugging Face Space
+name: Hugging Face Static Space
 
 on:
   pull_request:
@@ -6,9 +6,8 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "hf_space/**"
-      - "scripts/publish_space.py"
-      - "evaluation/**"
+      - "hf_static/**"
+      - "scripts/publish_static_space.py"
       - ".github/workflows/huggingface.yml"
 
 permissions:
@@ -22,24 +21,23 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install huggingface_hub==1.30.0
-      - name: Stage only tracked deployment files
-        run: python scripts/publish_space.py --repo-id singhankit491/otosage-aws --stage-only /tmp/space
-      - name: Build the exact Space image
-        run: docker build -t portfolio-space /tmp/space
-      - name: Check application startup
+      - name: Install Hub dependency
+        run: pip install huggingface_hub==1.30.0
+      - name: Smoke-test static application
         run: |
-          docker run -d --name portfolio-space -p 7860:7860 portfolio-space
-          for attempt in $(seq 1 60); do
-            if curl --fail http://localhost:7860/; then exit 0; fi
-            sleep 3
+          python -m http.server 8000 --directory hf_static >/tmp/otosage-static.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent http://localhost:8000/index.html >/dev/null; then exit 0; fi
+            sleep 1
           done
-          docker logs portfolio-space
+          cat /tmp/otosage-static.log
           exit 1
-      - name: Publish to Hugging Face
+      - name: Publish free Static Space to Hugging Face
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           test -n "$HF_TOKEN" || { echo "HF_TOKEN is not configured in this repository"; exit 1; }
-          python scripts/publish_space.py --repo-id singhankit491/otosage-aws
+          python scripts/publish_static_space.py --repo-id singhankit491/otosage-aws --folder hf_static
