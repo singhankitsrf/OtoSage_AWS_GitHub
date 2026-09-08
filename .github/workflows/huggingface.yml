@@ -1,9 +1,19 @@
 name: Hugging Face Space
+
 on:
   pull_request:
   workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "hf_space/**"
+      - "scripts/publish_space.py"
+      - "evaluation/**"
+      - ".github/workflows/huggingface.yml"
+
 permissions:
   contents: read
+
 jobs:
   validate-and-publish:
     runs-on: ubuntu-latest
@@ -11,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
       - run: pip install huggingface_hub==1.30.0
       - name: Stage only tracked deployment files
         run: python scripts/publish_space.py --repo-id singhankit491/otosage-aws --stage-only /tmp/space
@@ -27,9 +37,9 @@ jobs:
           docker logs portfolio-space
           exit 1
       - name: Publish to Hugging Face
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          test -n "$HF_TOKEN" || { echo "Configure HF_TOKEN as a GitHub Actions secret"; exit 1; }
+          test -n "$HF_TOKEN" || { echo "HF_TOKEN is not configured in this repository"; exit 1; }
           python scripts/publish_space.py --repo-id singhankit491/otosage-aws
