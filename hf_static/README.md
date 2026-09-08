@@ -1,7 +1,7 @@
 ---
 title: OtoSage AWS
 emoji: ☁️
-colorFrom: orange
+colorFrom: yellow
 colorTo: blue
 sdk: static
 app_file: index.html
