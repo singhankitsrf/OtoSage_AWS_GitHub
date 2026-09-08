@@ -1,0 +1,8 @@
+{
+  "model_evaluation": "pending",
+  "reason": "The five-class dataset and trained checkpoint are not available in this workspace.",
+  "published_accuracy": null,
+  "clinical_validation": "not established",
+  "hugging_face_mode": "image QA until a real checkpoint is configured",
+  "alternative_archive": "An available four-class archive was not substituted for the five-class task."
+}

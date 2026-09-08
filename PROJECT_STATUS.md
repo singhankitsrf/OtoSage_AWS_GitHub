@@ -14,7 +14,7 @@
 - API Gateway/Lambda/S3/DynamoDB/SNS application
 - Terraform infrastructure
 - GitHub Actions CI/CD + OIDC pattern
-- security, cost, model-card and recruiter documentation
+- architecture and account deployment documentation
 - Python syntax validation
 - unit tests
 

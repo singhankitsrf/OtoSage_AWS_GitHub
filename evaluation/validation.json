@@ -1,0 +1,8 @@
+{
+  "scope": "Local source validation; hosted Space and cloud accounts not yet verified",
+  "unit_tests_passed": 6,
+  "critical_python_lint": "passed",
+  "hugging_face_publishing": "requires authenticated access",
+  "gradio_http_config": "200 via in-process ASGI client",
+  "application_callback": "passed"
+}
