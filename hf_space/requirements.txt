@@ -1,0 +1,7 @@
+gradio==6.26.0
+huggingface_hub==1.30.0
+numpy==2.3.5
+pandas==2.2.3
+Pillow==12.3.0
+scikit-learn==1.8.0
+PyYAML==6.0.2

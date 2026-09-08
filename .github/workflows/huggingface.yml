@@ -1,0 +1,33 @@
+name: Hugging Face Space
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install huggingface_hub==1.30.0
+      - name: Stage only tracked deployment files
+        run: python scripts/publish_space.py --repo-id singhankit491/otosage-aws --stage-only /tmp/space
+      - name: Build the exact Space image
+        run: docker build -t portfolio-space /tmp/space
+      - name: Check application startup
+        run: |
+          docker run -d --name portfolio-space -p 7860:7860 portfolio-space
+          for attempt in $(seq 1 60); do
+            if curl --fail http://localhost:7860/; then exit 0; fi
+            sleep 3
+          done
+          docker logs portfolio-space
+          exit 1
+      - name: Publish to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          test -n "$HF_TOKEN" || { echo "Configure HF_TOKEN as a GitHub Actions secret"; exit 1; }
+          python scripts/publish_space.py --repo-id singhankit491/otosage-aws

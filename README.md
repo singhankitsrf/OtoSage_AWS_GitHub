@@ -43,9 +43,8 @@ ml/src/                 # preprocess, train, evaluate, inference
 deployment/             # async endpoint + autoscaling
 infra/terraform/        # AWS infrastructure as code
 scripts/                # upload, pipeline, demo invocation
-observability/          # CloudWatch dashboard template
 tests/                  # unit tests
-docs/                   # architecture, security, cost, model card
+docs/                   # architecture and account deployment notes
 .github/workflows/      # CI and OIDC deployment
 ```
 
@@ -108,3 +107,8 @@ This repository is an engineering/research portfolio implementation. It is not e
 **Ankit Kumar Singh**
 
 Healthcare AI • AWS • SageMaker • Applied AI • Medical Imaging • MLOps • Cloud Architecture
+
+## Hugging Face deployment and evaluation
+
+See [deployment instructions](docs/HUGGING_FACE.md) and the `hf_space/` application.
+The `evaluation/` directory distinguishes measured results from pending image-model evaluation.
