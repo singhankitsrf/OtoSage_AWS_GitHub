@@ -102,6 +102,13 @@ python scripts/create_pipeline.py
 
 This repository is an engineering/research portfolio implementation. It is not evidence of clinical validation, regulatory clearance, or suitability for autonomous diagnosis or treatment.
 
+
+## Evidence and real-world implementation
+
+Personally implemented by Ankit Kumar Singh as the AWS/cloud lifecycle counterpart to his otoscopic AI and clinical-support work associated with the ENT Department, AIIMS Raipur, and hospital-facing environments.
+
+Evidence is deliberately separated into repository-verifiable artifacts and author-confirmed institutional execution. See [EVIDENCE.md](EVIDENCE.md) for the verification matrix, reviewer path and claim boundaries.
+
 ## Author
 
 **Ankit Kumar Singh**
