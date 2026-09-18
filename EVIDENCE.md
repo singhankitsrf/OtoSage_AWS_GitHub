@@ -18,6 +18,12 @@ This statement records the author's implementation history. It does not by itsel
 | Measured result | Publishable model metrics remain pending in the repository evidence file. | Transparent evidence gap |
 | Ownership | Architecture and implementation were personally completed by Ankit Kumar Singh. | Author-confirmed |
 
+## Senior platform-engineering signal
+
+The repository should be assessed as evidence of the author's ability to translate a healthcare-AI workload into an AWS-native lifecycle: governed data ingress, SageMaker processing/training, registry-controlled promotion, asynchronous inference, event-driven job state, Terraform and CI/CD. The author reports personal implementation and healthcare-support execution context associated with AIIMS Raipur and hospital environments.
+
+The public repository does not expose confidential account identifiers, patient data or protected institutional infrastructure. AWS account run records, cost reports and production service-level evidence should be shared only when authorized.
+
 ## Reviewer path
 
 1. Read the main README and architecture documentation.
